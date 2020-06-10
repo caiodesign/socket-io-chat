@@ -1,10 +1,13 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+const express = require('express')
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const port = 3000;
+
+app.use('/public', express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 io.on('connection', function(socket){
